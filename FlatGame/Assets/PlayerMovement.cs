@@ -17,10 +17,22 @@ public class PlayerMovement : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        Vector3 characterScale = transform.localScale;
+        if (Input.GetAxis("Horizontal") < 0) {
+            characterScale.x = -1;
+        }
+        if (Input.GetAxis("Horizontal") > 0) {
+            characterScale.x = 1;
+        }
+
+        transform.localScale = characterScale;
     }
 
     void FixedUpdate()
     {
         rigidbody2D.MovePosition(rigidbody2D.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
+
+
 }
